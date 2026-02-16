@@ -1,7 +1,7 @@
 -- Import the Socket.IO client, make sure to only uncomment one of below
 --local SocketIO = require("../dist/socketio") -- For Luau
 -- local SocketIO = require(game.ServerScriptService.Library.SocketIO) -- For Roblox
-local SocketIO = loadstring(game:HttpGet(""))() -- For Roblox executor environments
+local SocketIO = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/socket.io-for-roblox-executor/refs/heads/main/dist/socketio.lua"))() -- For Roblox executor environments
 
 -- Create a new Socket.IO client
 local url = "http://localhost:3000" -- Enter your server's URL using socket.io

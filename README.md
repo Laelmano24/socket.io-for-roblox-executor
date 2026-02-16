@@ -28,6 +28,13 @@ $ npm i
 $ npm run compile
 ```
 
+### For Lune
+Copy `dist/socketio.lua` to your Lune project and require it:
+
+```lua
+local SocketIO = require("path/to/SocketIO")
+```
+
 ### For Roblox
 Copy `dist/socketio.lua` to your Roblox project and require it:
 
@@ -35,17 +42,10 @@ Copy `dist/socketio.lua` to your Roblox project and require it:
 local SocketIO = require(script.Parent.SocketIO)
 ```
 
-### For Roblox executor environments
-Copy `dist/socketio.lua` to your Roblox project and require it:
-
-```lua
-local SocketIO = loadstring(game:HttpGet(""))()
-```
-
 ## Quick Start
 
 ```lua
-local SocketIO = require("path/to/SocketIO")
+local SocketIO = loadstring(game:HttpGet("https://raw.githubusercontent.com/Laelmano24/socket.io-for-roblox-executor/refs/heads/main/dist/socketio.lua"))()
 
 -- Create a new Socket.IO client
 local url = "http://localhost:3000" -- Enter your server's URL using socket.io
