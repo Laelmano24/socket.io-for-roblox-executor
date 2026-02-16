@@ -11,7 +11,7 @@ A Socket.IO client implementation for Luau, support both Roblox and Lune environ
 - ✅ **Acknowledgments**: Support for ACK callbacks
 - ✅ **Message Queuing**: Queues messages when disconnected and data throttle
 - ✅ **Heartbeat/Ping-Pong**: Automatic connection health checks
-- ✅ **Environment Support**: Works in both Roblox and Lune environments
+- ✅ **Environment Support**: Works in both Roblox (executor environments) and Lune environments
 
 ### Limitations
 
@@ -35,13 +35,21 @@ Copy `dist/socketio.lua` to your Roblox project and require it:
 local SocketIO = require(script.Parent.SocketIO)
 ```
 
+### For Roblox executor environments
+Copy `dist/socketio.lua` to your Roblox project and require it:
+
+```lua
+local SocketIO = loadstring(game:HttpGet(""))()
+```
+
 ## Quick Start
 
 ```lua
 local SocketIO = require("path/to/SocketIO")
 
 -- Create a new Socket.IO client
-local socket = SocketIO.new("http://localhost:3000", {
+local url = "http://localhost:3000" -- Enter your server's URL using socket.io
+local socket = SocketIO.new(url, {
     maxReconnectionAttempts = 10,
     reconnectionDelay = 1000,
     reconnectionDelayMax = 5000,

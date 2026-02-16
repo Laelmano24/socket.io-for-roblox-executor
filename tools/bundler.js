@@ -1,3 +1,4 @@
+let { Minify } = require("lua-format");
 let chokidar = require('chokidar');
 let fs = require('fs');
 
@@ -71,6 +72,13 @@ function rebundle(isInitial){
 
 		bundled += `\nmodules["${entryFile}"] = pendingModules["${entryFile}"](wrapRequire)\nreturn modules["${entryFile}"]`
 
-		if(bundled) fs.writeFileSync(distPath, header + bundled + footer);
+		if(bundled) {
+			if (process.argv[4] === '--compile-minify') {
+				const source = header + bundled + footer
+				fs.writeFileSync(distPath, Minify(source, {}));
+			} else if(process.argv[4] === '--compile') {
+				fs.writeFileSync(distPath, header + bundled + footer);
+			}
+		}
 	}, 500);
 }

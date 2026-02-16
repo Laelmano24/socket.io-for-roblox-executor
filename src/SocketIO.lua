@@ -65,7 +65,10 @@ end
 -- HTTP request handlers for different environments
 local function createHTTPRequestHandler()
 	if isRoblox then -- Roblox HTTP implementation
+
+		local env_executor = (getgenv or getfenv)()
 		local httpService = game:GetService("HttpService")
+
 		return {
 			request = function(url, method, headers, body, callback)
 				if body == '' then body = nil end
@@ -79,7 +82,14 @@ local function createHTTPRequestHandler()
 					Body = body
 				}
 
-				local response = httpService:RequestAsync(options)
+				local response = nil
+
+				if env_executor.request then
+					response = env_executor.request(options)
+				else
+					httpService:RequestAsync(options)
+				end
+
 				if not response.Success then
 					callback(response, nil)
 					return
